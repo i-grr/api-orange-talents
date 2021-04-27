@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.github.i_grr.api.orange.talents.model.Endereco;
-import io.github.i_grr.api.orange.talents.model.exception.UsuarioNotFoundException;
+import io.github.i_grr.api.orange.talents.model.exception.EnderecoNotFoundException;
 import io.github.i_grr.api.orange.talents.repository.EnderecoRepository;
 
 @Service
@@ -33,7 +33,7 @@ public class EnderecoService {
 	
 	public Endereco getEndereco(Long id) {
 		return enderecoRepository.findById(id).orElseThrow(() ->
-				new UsuarioNotFoundException(id));
+				new EnderecoNotFoundException(id));
 	}
 	
 }
