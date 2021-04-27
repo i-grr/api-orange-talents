@@ -2,12 +2,9 @@ package io.github.i_grr.api.orange.talents.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Endereco {
@@ -35,10 +32,6 @@ public class Endereco {
 	
 	@Column(nullable = false, length = 8)
 	private String cep;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "usuario_id", nullable = false)
-	private Usuario usuario;
 	
 	public Long getId() {
 		return id;
@@ -104,11 +97,4 @@ public class Endereco {
 		this.cep = cep;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 }

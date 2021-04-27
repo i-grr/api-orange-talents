@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -32,8 +33,9 @@ public class Usuario {
 	@Column(name = "data_nascimento", nullable = false)
 	private LocalDate dataNascimento;
 	
-	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY,
+	@OneToMany(fetch = FetchType.LAZY,
 			   cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+	@JoinColumn(name = "usuario_id")
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	public void addEndereco(Endereco endereco) {
