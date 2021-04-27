@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import io.github.i_grr.api.orange.talents.model.dto.EnderecoDto;
+
 @Entity
 public class Endereco {
 	
@@ -32,6 +34,19 @@ public class Endereco {
 	
 	@Column(nullable = false, length = 8)
 	private String cep;
+	
+	public static Endereco from(EnderecoDto enderecoDto) {
+		Endereco endereco = new Endereco();
+		endereco.setId(enderecoDto.getId());
+		endereco.setLogradouro(enderecoDto.getLogradouro());
+		endereco.setNumero(enderecoDto.getNumero());
+		endereco.setComplemento(enderecoDto.getComplemento());
+		endereco.setBairro(enderecoDto.getBairro());
+		endereco.setCidade(enderecoDto.getCidade());
+		endereco.setEstado(enderecoDto.getEstado());
+		endereco.setCep(enderecoDto.getCep());
+		return endereco;
+	}
 	
 	public Long getId() {
 		return id;

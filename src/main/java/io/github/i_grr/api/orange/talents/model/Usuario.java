@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import io.github.i_grr.api.orange.talents.model.dto.UsuarioDto;
+
 @Entity
 public class Usuario {
 	
@@ -40,6 +42,17 @@ public class Usuario {
 
 	public void addEndereco(Endereco endereco) {
 		enderecos.add(endereco);
+	}
+	
+	public static Usuario from(UsuarioDto usuarioDto) {
+		Usuario usuario = new Usuario();
+		usuario.setId(usuarioDto.getId());
+		usuario.setNome(usuarioDto.getNome());
+		usuario.setEmail(usuarioDto.getEmail());
+		usuario.setCpf(usuarioDto.getCpf());
+		usuario.setDataNascimento(usuarioDto.getDataNascimento());
+		usuario.setEnderecos(usuarioDto.getEnderecos());
+		return usuario;
 	}
 	
 	public Long getId() {
@@ -84,6 +97,10 @@ public class Usuario {
 
 	public List<Endereco> getEnderecos() {
 		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 	
 }
