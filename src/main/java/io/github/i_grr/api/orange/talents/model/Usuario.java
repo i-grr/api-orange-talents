@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import io.github.i_grr.api.orange.talents.model.dto.UsuarioDto;
+import io.github.i_grr.api.orange.talents.model.dto.request.UsuarioRequestDto;
 
 @Entity
 public class Usuario {
@@ -51,7 +52,15 @@ public class Usuario {
 		usuario.setEmail(usuarioDto.getEmail());
 		usuario.setCpf(usuarioDto.getCpf());
 		usuario.setDataNascimento(usuarioDto.getDataNascimento());
-		usuario.setEnderecos(usuarioDto.getEnderecos());
+		return usuario;
+	}
+	
+	public static Usuario from(UsuarioRequestDto usuarioRequestDto) {
+		Usuario usuario = new Usuario();
+		usuario.setNome(usuarioRequestDto.getNome());
+		usuario.setEmail(usuarioRequestDto.getEmail());
+		usuario.setCpf(usuarioRequestDto.getCpf());
+		usuario.setDataNascimento(usuarioRequestDto.getDataNascimento());
 		return usuario;
 	}
 	

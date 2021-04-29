@@ -8,4 +8,8 @@ import io.github.i_grr.api.orange.talents.model.Usuario;
 @Repository
 public interface UsuarioRepository extends CrudRepository<Usuario, Long>{
 
+	Boolean existsByEmail(String email);
+	
+	Boolean existsByCpf(String cpf);
+	
 }

@@ -1,9 +1,6 @@
-package io.github.i_grr.api.orange.talents.model.dto;
+package io.github.i_grr.api.orange.talents.model.dto.request;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -13,11 +10,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import io.github.i_grr.api.orange.talents.model.Usuario;
-
-public class UsuarioDto {
-	
-	private Long id;
+public class UsuarioRequestDto {
 	
 	@NotBlank(message = "O campo nome é obrigatório")
 	private String nome;
@@ -33,27 +26,6 @@ public class UsuarioDto {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	@NotNull(message = "O campo data de nascimento é obrigatório")
 	private LocalDate dataNascimento;
-	
-	private List<EnderecoDto> enderecos = new ArrayList<>();
-	
-	public static UsuarioDto from(Usuario usuario) {
-		UsuarioDto usuarioDto = new UsuarioDto();
-		usuarioDto.setId(usuario.getId());
-		usuarioDto.setNome(usuario.getNome());
-		usuarioDto.setEmail(usuario.getEmail());
-		usuarioDto.setCpf(usuario.getCpf());
-		usuarioDto.setDataNascimento(usuario.getDataNascimento());
-		usuarioDto.setEnderecos(usuario.getEnderecos().stream().map(EnderecoDto::from).collect(Collectors.toList()));
-		return usuarioDto;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return nome;
@@ -85,14 +57,6 @@ public class UsuarioDto {
 
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
-	}
-
-	public List<EnderecoDto> getEnderecos() {
-		return enderecos;
-	}
-
-	public void setEnderecos(List<EnderecoDto> enderecosDto) {
-		this.enderecos = enderecosDto;
 	}
 
 }

@@ -6,8 +6,8 @@ public class UsuarioNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public UsuarioNotFoundException(Long id) {
-		super(MessageFormat.format("Não foi possível localizar o usuário com o id {0}", id));
+	public UsuarioNotFoundException(final Long id) {
+		super(MessageFormat.format("Desculpe, o usuário com o id {0} não foi encontrado!", id));
 	}
 	
 }

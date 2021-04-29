@@ -1,31 +1,25 @@
 package io.github.i_grr.api.orange.talents.model.dto;
 
-import javax.validation.constraints.NotBlank;
-
 import io.github.i_grr.api.orange.talents.model.Endereco;
+import io.github.i_grr.api.orange.talents.model.dto.request.EnderecoRequestDto;
+import io.github.i_grr.api.orange.talents.model.dto.response.CepResponseDto;
 
 public class EnderecoDto {
 	
 	private Long id;
 	
-	@NotBlank(message = "O campo logradouro é obrigatório")
 	private String logradouro;
 	
-	@NotBlank(message = "O campo numero é obrigatório")
 	private String numero;
 	
 	private String complemento;
-	
-	@NotBlank(message = "O campo bairro é obrigatório")
+
 	private String bairro;
 	
-	@NotBlank(message = "O campo cidade é obrigatório")
 	private String cidade;
 	
-	@NotBlank(message = "O campo estado é obrigatório")
 	private String estado;
 	
-	@NotBlank(message = "O campo CEP é obrigatório")
 	private String cep;
 	
 	public static EnderecoDto from(Endereco endereco) {
@@ -38,6 +32,18 @@ public class EnderecoDto {
 		enderecoDto.setCidade(endereco.getCidade());
 		enderecoDto.setEstado(endereco.getEstado());
 		enderecoDto.setCep(endereco.getCep());
+		return enderecoDto;
+	}
+	
+	public static EnderecoDto from(EnderecoRequestDto enderecoRequest, CepResponseDto cepResponse) {
+		EnderecoDto enderecoDto = new EnderecoDto();
+		enderecoDto.setLogradouro(cepResponse.getLogradouro());
+		enderecoDto.setNumero(enderecoRequest.getNumero());
+		enderecoDto.setComplemento(enderecoRequest.getComplemento());
+		enderecoDto.setBairro(cepResponse.getBairro());
+		enderecoDto.setCidade(cepResponse.getLocalidade());
+		enderecoDto.setEstado(cepResponse.getUf());
+		enderecoDto.setCep(enderecoRequest.getCep());
 		return enderecoDto;
 	}
 	
@@ -105,6 +111,4 @@ public class EnderecoDto {
 		this.cep = cep;
 	}
 	
-	
-
 }
