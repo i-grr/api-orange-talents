@@ -1,9 +1,10 @@
 package io.github.i_grr.api.orange.talents.model.dto.response;
 
-import io.github.i_grr.api.orange.talents.model.dto.EnderecoDto;
+import io.github.i_grr.api.orange.talents.model.Endereco;
+import io.github.i_grr.api.orange.talents.model.dto.request.EnderecoRequestDto;
 
 public class EnderecoResponseDto {
-
+	
 	private String logradouro;
 	
 	private String numero;
@@ -11,22 +12,34 @@ public class EnderecoResponseDto {
 	private String complemento;
 
 	private String bairro;
-
+	
 	private String cidade;
-
+	
 	private String estado;
-
+	
 	private String cep;
 	
-	public static EnderecoResponseDto from(EnderecoDto enderecoDto) {
+	public static EnderecoResponseDto from(Endereco endereco) {
 		EnderecoResponseDto enderecoResponseDto = new EnderecoResponseDto();
-		enderecoResponseDto.setLogradouro(enderecoDto.getLogradouro());
-		enderecoResponseDto.setNumero(enderecoDto.getNumero());
-		enderecoResponseDto.setComplemento(enderecoDto.getComplemento());
-		enderecoResponseDto.setBairro(enderecoDto.getBairro());
-		enderecoResponseDto.setCidade(enderecoDto.getCidade());
-		enderecoResponseDto.setEstado(enderecoDto.getEstado());
-		enderecoResponseDto.setCep(enderecoDto.getCep());
+		enderecoResponseDto.setLogradouro(endereco.getLogradouro());
+		enderecoResponseDto.setNumero(endereco.getNumero());
+		enderecoResponseDto.setComplemento(endereco.getComplemento());
+		enderecoResponseDto.setBairro(endereco.getBairro());
+		enderecoResponseDto.setCidade(endereco.getCidade());
+		enderecoResponseDto.setEstado(endereco.getEstado());
+		enderecoResponseDto.setCep(endereco.getCep());
+		return enderecoResponseDto;
+	}
+	
+	public static EnderecoResponseDto from(EnderecoRequestDto enderecoRequest, CepResponseDto cepResponse) {
+		EnderecoResponseDto enderecoResponseDto = new EnderecoResponseDto();
+		enderecoResponseDto.setLogradouro(cepResponse.getLogradouro());
+		enderecoResponseDto.setNumero(enderecoRequest.getNumero());
+		enderecoResponseDto.setComplemento(enderecoRequest.getComplemento());
+		enderecoResponseDto.setBairro(cepResponse.getBairro());
+		enderecoResponseDto.setCidade(cepResponse.getLocalidade());
+		enderecoResponseDto.setEstado(cepResponse.getUf());
+		enderecoResponseDto.setCep(enderecoRequest.getCep());
 		return enderecoResponseDto;
 	}
 

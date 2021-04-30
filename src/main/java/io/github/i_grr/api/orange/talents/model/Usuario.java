@@ -14,8 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import io.github.i_grr.api.orange.talents.model.dto.UsuarioDto;
 import io.github.i_grr.api.orange.talents.model.dto.request.UsuarioRequestDto;
+import io.github.i_grr.api.orange.talents.model.dto.response.UsuarioResponseDto;
 
 @Entity
 public class Usuario {
@@ -45,22 +45,22 @@ public class Usuario {
 		enderecos.add(endereco);
 	}
 	
-	public static Usuario from(UsuarioDto usuarioDto) {
+	public static Usuario from(UsuarioRequestDto usuarioRequest) {
 		Usuario usuario = new Usuario();
-		usuario.setId(usuarioDto.getId());
-		usuario.setNome(usuarioDto.getNome());
-		usuario.setEmail(usuarioDto.getEmail());
-		usuario.setCpf(usuarioDto.getCpf());
-		usuario.setDataNascimento(usuarioDto.getDataNascimento());
+		usuario.setNome(usuarioRequest.getNome());
+		usuario.setEmail(usuarioRequest.getEmail());
+		usuario.setCpf(usuarioRequest.getCpf());
+		usuario.setDataNascimento(usuarioRequest.getDataNascimento());
 		return usuario;
 	}
 	
-	public static Usuario from(UsuarioRequestDto usuarioRequestDto) {
+	public static Usuario from(UsuarioResponseDto usuarioResponse) {
 		Usuario usuario = new Usuario();
-		usuario.setNome(usuarioRequestDto.getNome());
-		usuario.setEmail(usuarioRequestDto.getEmail());
-		usuario.setCpf(usuarioRequestDto.getCpf());
-		usuario.setDataNascimento(usuarioRequestDto.getDataNascimento());
+		usuario.setId(usuarioResponse.getId());
+		usuario.setNome(usuarioResponse.getNome());
+		usuario.setEmail(usuarioResponse.getEmail());
+		usuario.setCpf(usuarioResponse.getCpf());
+		usuario.setDataNascimento(usuarioResponse.getDataNascimento());
 		return usuario;
 	}
 	

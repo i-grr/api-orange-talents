@@ -32,13 +32,13 @@ public class ApplicationControllerAdvice {
 	}
 	
 	@ExceptionHandler(ExistingCpfException.class)
-	@ResponseStatus(HttpStatus.CONFLICT)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ApiErrors handleIExistingFieldsError(ExistingCpfException e) {
 		return new ApiErrors(e.getMessage());
 	}
 	
 	@ExceptionHandler(ExistingEmailException.class)
-	@ResponseStatus(HttpStatus.CONFLICT)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ApiErrors handleIExistingFieldsError(ExistingEmailException e) {
 		return new ApiErrors(e.getMessage());
 	}

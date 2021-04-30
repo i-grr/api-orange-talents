@@ -1,7 +1,5 @@
 package io.github.i_grr.api.orange.talents.service;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +35,6 @@ public class UsuarioService {
 			new UsuarioNotFoundException(id));
 	}
 	
-	@Transactional
 	public Usuario addEnderecosToUsuario(Long usuarioId, Endereco endereco) {
 		Usuario usuario = getUsuario(usuarioId);
 		usuario.addEndereco(endereco);

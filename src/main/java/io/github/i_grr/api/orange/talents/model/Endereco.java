@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import io.github.i_grr.api.orange.talents.model.dto.EnderecoDto;
+import io.github.i_grr.api.orange.talents.model.dto.response.EnderecoResponseDto;
 
 @Entity
 public class Endereco {
@@ -39,16 +39,17 @@ public class Endereco {
 	@ManyToOne
 	private Usuario usuario;
 	
-	public static Endereco from(EnderecoDto enderecoDto) {
+	// Métodos Getters e Setters
+	
+	public static Endereco from(EnderecoResponseDto enderecoResponse) {
 		Endereco endereco = new Endereco();
-		endereco.setId(enderecoDto.getId());
-		endereco.setLogradouro(enderecoDto.getLogradouro());
-		endereco.setNumero(enderecoDto.getNumero());
-		endereco.setComplemento(enderecoDto.getComplemento());
-		endereco.setBairro(enderecoDto.getBairro());
-		endereco.setCidade(enderecoDto.getCidade());
-		endereco.setEstado(enderecoDto.getEstado());
-		endereco.setCep(enderecoDto.getCep());
+		endereco.setLogradouro(enderecoResponse.getLogradouro());
+		endereco.setNumero(enderecoResponse.getNumero());
+		endereco.setComplemento(enderecoResponse.getComplemento());
+		endereco.setBairro(enderecoResponse.getBairro());
+		endereco.setCidade(enderecoResponse.getCidade());
+		endereco.setEstado(enderecoResponse.getEstado());
+		endereco.setCep(enderecoResponse.getCep());
 		return endereco;
 	}
 	

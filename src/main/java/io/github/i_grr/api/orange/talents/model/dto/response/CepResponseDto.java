@@ -9,7 +9,7 @@ public class CepResponseDto {
 	private String localidade;
 	 
 	private String uf;
-
+	
 	public String getLogradouro() {
 		return logradouro;
 	}

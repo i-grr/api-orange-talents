@@ -15,13 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.github.i_grr.api.orange.talents.model.Endereco;
 import io.github.i_grr.api.orange.talents.model.Usuario;
-import io.github.i_grr.api.orange.talents.model.dto.EnderecoDto;
-import io.github.i_grr.api.orange.talents.model.dto.UsuarioDto;
-import io.github.i_grr.api.orange.talents.model.dto.UsuarioSimpleDto;
 import io.github.i_grr.api.orange.talents.model.dto.request.EnderecoRequestDto;
 import io.github.i_grr.api.orange.talents.model.dto.request.UsuarioRequestDto;
 import io.github.i_grr.api.orange.talents.model.dto.response.CepResponseDto;
 import io.github.i_grr.api.orange.talents.model.dto.response.EnderecoResponseDto;
+import io.github.i_grr.api.orange.talents.model.dto.response.UsuarioResponseDto;
 import io.github.i_grr.api.orange.talents.service.CepService;
 import io.github.i_grr.api.orange.talents.service.UsuarioService;
 import io.swagger.annotations.Api;
@@ -44,16 +42,16 @@ public class UsuarioController {
 	
 	@PostMapping
 	@ApiOperation(value = "Cadastra um usuário")
-	public ResponseEntity<UsuarioSimpleDto> addUsuario(@RequestBody @Valid final UsuarioRequestDto usuarioRequestDto) {
-		Usuario usuario = usuarioService.addUsuario(Usuario.from(usuarioRequestDto));
-		return new ResponseEntity<>(UsuarioSimpleDto.from(usuario), HttpStatus.CREATED);
+	public ResponseEntity<UsuarioResponseDto> addUsuario(@RequestBody @Valid final UsuarioRequestDto usuarioRequest) {
+		Usuario usuario = usuarioService.addUsuario(Usuario.from(usuarioRequest));
+		return new ResponseEntity<>(UsuarioResponseDto.from(usuario), HttpStatus.CREATED);
 	}
 	
 	@ApiOperation(value = "Retorna um usuário e seus endereços através do id")
 	@GetMapping(value = "{id}")
-	public ResponseEntity<UsuarioDto> getUsuario(@PathVariable final Long id) {
+	public ResponseEntity<UsuarioResponseDto> getUsuario(@PathVariable final Long id) {
 		Usuario usuarios = usuarioService.getUsuario(id);
-		return new ResponseEntity<>(UsuarioDto.from(usuarios), HttpStatus.OK);
+		return new ResponseEntity<>(UsuarioResponseDto.from(usuarios), HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "{usuarioId}/enderecos")
@@ -61,9 +59,9 @@ public class UsuarioController {
 	public ResponseEntity<EnderecoResponseDto> addEnderecoToUsuario(@PathVariable final Long usuarioId,
 														    @RequestBody @Valid final EnderecoRequestDto enderecoRequest) {
 		CepResponseDto cepResponse = cepService.getCepResponseDto(enderecoRequest.getCep());
-		EnderecoDto enderecoDto = EnderecoDto.from(enderecoRequest, cepResponse);
-		usuarioService.addEnderecosToUsuario(usuarioId, Endereco.from(enderecoDto));
-		return new ResponseEntity<>(EnderecoResponseDto.from(enderecoDto), HttpStatus.CREATED);
+		EnderecoResponseDto enderecoResponse = EnderecoResponseDto.from(enderecoRequest, cepResponse);
+		usuarioService.addEnderecosToUsuario(usuarioId, Endereco.from(enderecoResponse));
+		return new ResponseEntity<>(enderecoResponse, HttpStatus.CREATED);
 	}
 	
 }
